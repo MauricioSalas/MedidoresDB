@@ -14,7 +14,7 @@ namespace MedidoresDB
         private IMedidorDALDB medidorDAL = new MedidorDALDB();
         private void cargarGrilla(List<Medidor> medidores)
         {
-            this.grillaMedidores.DataSource = medidores;
+            this.grillaMedidores.DataSource = medidores.Where(m => m.TipoMedidor.ToLower() == tipoMedidorDropdown.SelectedItem.Text.ToLower());
             this.grillaMedidores.DataBind();
         }
 
@@ -34,7 +34,7 @@ namespace MedidoresDB
 
         protected void tipoMedidorDropdown_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            this.cargarGrilla();
         }
 
         protected void grillaMedidores_RowCommand(object sender, GridViewCommandEventArgs e)
